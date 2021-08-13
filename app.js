@@ -25,6 +25,13 @@ function addKitten(event) {
     mood: "Tolerant"
   }
 
+  for (let i = 0; i < kittens.length; i++) {
+    if (kittens[i].name == event.target.name.value) {
+      alert("Can't have kitten more than once.")
+      throw new Error("multiple kitten error")
+    }
+  }
+
   // @ts-ignore
   kittens.push(kitten)
   saveKittens()
@@ -60,7 +67,7 @@ function drawKittens() {
   let kittensTemplate = ""
   kittens.forEach(kitten => {
     kittensTemplate += `
-     <div id="kittencard" class="card container kitten">
+     <div id="kittencard" class="card container kitten ${kitten.mood}">
         <img src="https://robohash.org/${kitten.name}.png?set=set4">
           <div>
             <span id="kitten-title">Name:</span>
@@ -75,8 +82,8 @@ function drawKittens() {
             <span>${kitten.affection}</span>
           </div>
           <div>
-          <button onclick="pet('${kitten.id}')">Pet</button>
-          <button onclick="catnip('${kitten.id}')">Cat Nip</button>
+          <button onclick="pet('${kitten.id}')" class="btn-pet m-1">Pet</button>
+          <button onclick="catnip('${kitten.id}')" class="m-1">Cat Nip</button>
           </div>
       </div>
     `
@@ -137,27 +144,20 @@ function catnip(id) {
  * @param {Kitten} kitten
  */
 function setKittenMood(kitten) {
-  let kittenElement = document.getElementById("kittencard")
+
   if (kitten.affection > 6) {
-    kittenElement.classList.remove("kitten")
     kitten.mood = "Happy"
   }
   if (kitten.affection <= 5) {
-    kittenElement.classList.remove("kitten")
     kitten.mood = "Tolerant"
   }
   if (kitten.affection <= 3) {
-    kittenElement.classList.remove("kitten")
-    kitten.mood = "Angry";
+    kitten.mood = "Angry"
   }
   if (kitten.affection <= 0) {
-    kittenElement.classList.remove("kitten")
     kitten.mood = "Gone"
   }
-
 }
-
-
 
 function getStarted() {
   document.getElementById("welcome").classList.add("hidden");
