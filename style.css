@@ -13,6 +13,7 @@
   --dark-lighten: #504c4c;
   --light: #fdfdfd;
   --danger: #ff3737;
+  --danger-lighten: #f76565;
 }
 
 body{
@@ -114,6 +115,9 @@ button.btn-special:hover{
 }
 button.btn-pet{
   background-color: var(--danger);
+}
+button.btn-pet:hover{
+  background-color: var(--danger-lighten);
 }
 .container{
   margin: 0 .5em;
